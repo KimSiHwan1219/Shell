@@ -17,6 +17,7 @@ int main(void)
     int ret, status;
     pid_t pid, cpid;
     char hostname[LEN_HOSTNAME + 1];
+    char delimeter[] = " ;";
     char *p;
 
     memset(hostname, 0x00, sizeof(hostname)); 
@@ -24,9 +25,8 @@ int main(void)
 
     while (true) {
         char *s;
+        int len; 
         char Exit[MAX_LEN_LINE] = {'e', 'x', 'i', 't', '\n'};
-        int len;        
-
         printf("%s@%s$ ",getpwuid(getuid())->pw_name, hostname);
         s = fgets(command, MAX_LEN_LINE, stdin);
         if (s == NULL) {
@@ -35,7 +35,7 @@ int main(void)
         }
 
         if (strcmp(s, Exit) == 0) {
-   exit(0);
+    exit(0);
         }
 
         len = strlen(command);
@@ -73,7 +73,7 @@ int main(void)
                     return 1;
                 }
             }
-            p = strtok(NULL, " ;");
+            p = strtok(NULL, delimeter);
         } 
     }
     return 0;
